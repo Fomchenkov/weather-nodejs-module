@@ -1,0 +1,36 @@
+{
+  "name": "kronver-weather",
+  "version": "1.0.0",
+  "description": "Weather NodeJS module",
+  "main": "./lib/main.js",
+  "scripts": {
+    "test": "",
+    "compile": "npx babel --presets es2015 -d lib/ src/",
+    "main": "node ./lib/main.js",
+    "go": "npm run compile; npm run main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fomchenkov/weather-nodejs-module.git"
+  },
+  "keywords": [
+    "weather",
+    "NodeJS"
+  ],
+  "author": "Vyacheslav Fomchenkov",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.15.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1"
+  },
+  "dependencies": {
+    "axios": "^0.17.1"
+  }
+}
