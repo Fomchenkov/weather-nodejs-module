@@ -23,7 +23,10 @@ class WeatherData {
 async function getWeatherData(city) {
 	let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}`
 	url += `&appid=${apiKey}&lang=en&units=metric`
-	let response = await axios.get(url).catch(e => console.log(e))
+	let response = await axios.get(url).catch(e => e)
+	if (! response) {
+		return new WeatherData('', '', '', '')
+	}
 	return new WeatherData(
 		city, 
 		response.data['weather'][0]['description'], 
@@ -36,6 +39,9 @@ async function getWeatherData(city) {
  * @param {WeatherData} weatherData 
  */
 function generateWeatherMessage(weatherData) {
+	if (! weatherData.city) {
+		return 'City not found!'
+	}
 	return `Город ${weatherData.city}\n` +
 		`Сейчас на улице ${weatherData.description}\n` +
 		`Скорость ветра: ${Math.round(weatherData.speed)}\n` + 
@@ -46,11 +52,11 @@ async function main() {
 	let city = process.argv[2]
 
 	if (! city) {
-		console.log('No city!')
+		console.log('No city!\n$ kronver-weather <City>`')
 		process.exit(0)
 	}
 
-	let wd = await getWeatherData(city).catch(e => console.log(e))
+	let wd = await getWeatherData(city).catch(e => e)
 	let message = generateWeatherMessage(wd)
 	console.log(message)
 }
